@@ -1,12 +1,12 @@
-function Find_monomial(mon1::Monomial{C},mon2::PolyVar{C}) where {C}
-    return Find_monomial(mon1, Monomial{C}([mon2],[1]));
+function Find_monomial(mon1::Monomial{C}, mon2::PolyVar{C}) where {C}
+    return Find_monomial(mon1, Monomial{C}([mon2], [1]));
 end
-function Find_monomial(mon1::Monomial{C},mon2::Monomial{C}) where {C}
-    #Is it impossible for mon2 to intersecate? i.e. position=1,2 and l2=2.
+function Find_monomial(mon1::Monomial{C}, mon2::Monomial{C}) where {C}
+    #Is it impossible for mon2 to intersecate? i.e. position == 1,2 and l2 == 2.
     l1 = length(mon1.z);
     l2 = length(mon2.z);
     positions = [];
-    if l2>l1
+    if l2 > l1
         return positions;
     end
     if l2>2

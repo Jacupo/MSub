@@ -19,11 +19,9 @@ uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[DynamicPolynomials]]
 deps = ["DataStructures", "Future", "LinearAlgebra", "MultivariatePolynomials", "MutableArithmetics", "Pkg", "Reexport", "Test"]
-git-tree-sha1 = "9cf7148128696ae1faf7bf202ae9e79f3ccceb21"
-repo-rev = "master"
-repo-url = "DynamicPolynomials"
+path = "/home/tweisser/.julia/dev/DynamicPolynomials"
 uuid = "7c1d4256-1411-5781-91ec-d7bc3513ac07"
-version = "0.3.8"
+version = "0.3.9"
 
 [[Future]]
 deps = ["Random"]
