@@ -23,6 +23,26 @@ using MSub
     end
 end
 
+@testset "find_monomial" begin
+    @testset "Find PolyVar" begin
+        @test MSub.find_monomial(x*y*z*x*z*y*x,x)==[1,4,7];
+        @test MSub.find_monomial(x*y*x^2*z,x)==[1,3];
+    end
+    @testset "Find Monomial(1)" begin
+        @test MSub.find_monomial(x*y*z*x*z*y*x,Monomial{false}([x],[1]))==[1,4,7];
+    end
+    @testset "Find Monomial(>1)" begin
+        @test MSub.find_monomial(x*y*z*x*z^2*x*y,x*y)==[1,6];
+        @test MSub.find_monomial(x^3*y^2*z,x*y)==[1];
+        @test MSub.find_monomial(x*y*z*x*z^2*x*y^2,x*y^2)==[6];
+        @test MSub.find_monomial(x*y*z*y*z^2*y,x*y*z)==[1];
+        @test MSub.find_monomial(x*y*z^2*y*z^2*y,x*y*z)==[1];
+        @test MSub.find_monomial(x*y*z^2*y*z^2*y*x*y*z,x*y*z)==[1,7];
+        @test MSub.find_monomial(x*y*z*y*z^2*y*x*y*z^3,x*y*z^2)==[7];
+    end
+end
+
+
 
 
 @testset "Sub_monomial" begin
