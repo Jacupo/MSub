@@ -4,7 +4,7 @@ using MultivariatePolynomials;
 using DynamicPolynomials;
 
 const MMonomialLike{C} =  Union{PolyVar{C}, Monomial{C}}
-const MTermLike{C,T} = Union{MMonomialLike{C},Term{C,T}}
+# const MTermLike{C,T} = Union{MMonomialLike{C},Term{C,T}}
 const MPolynomialLike{C, T} =  Union{T, PolyVar{C}, Monomial{C}, Term{C, T}, Polynomial{C, T}}
 
 include("reduce.jl")
