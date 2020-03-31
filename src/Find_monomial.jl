@@ -6,7 +6,7 @@ Second output is the length of mon2.
 """
 function Base.findfirst(mon1::MMonomialLike{C}, mon2::PolyVar{C}) where {C}
         position = findfirst( x -> x == mon2, variables(mon1))
-        if position isa Nothing 
+        if position isa Nothing
             return 0, 1
         else
             return position, 1
@@ -17,17 +17,17 @@ function _subvectors(v::AbstractVector, l::Int)
     if l == 0
         return []
     else
-        @assert length(v) >= l 
+        @assert length(v) >= l
         return [v[i:i+l-1] for i = 1:length(v)-l+1]
     end
 end
 
 function _match(c::Bool, v1::AbstractVector, v2::AbstractVector)
-    if c || length(c) <= 2
+    if c || length(v2) <= 2
         return all(v1-v2.>=0)
     else
         v = v1-v2
-        return first(v) >= 0 && last(v) >= 0 && all(v[2:end-1] .>=0)
+        return first(v) >= 0 && last(v) >= 0 && all(v[2:end-1] .== 0)
     end
 end
 
@@ -57,7 +57,7 @@ Returns nothing if mon2 is not a factor of mon1.
 """
 function split(mon1::Monomial{C}, mon2::MMonomialLike{C}) where {C}
     pos, l = findfirst(mon1, mon2)
-    if pos == 0 
+    if pos == 0
         return nothing
     else
         exp1 = exponents(mon1)[1:pos-1]
