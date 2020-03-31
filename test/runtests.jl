@@ -129,7 +129,8 @@ end
 
 
 
-@testset "Misc. tests to add" begin
+
+@testset "Misc. tests to add" begin 
     @test sub_monomial(x^2*y^2,x*y,-y*x,recursive=false) == -x*y*x*y;
     @test sub_monomial(x^2*y^2,x*y,-y*x,recursive=true)  == y^2*x^2;
 end
