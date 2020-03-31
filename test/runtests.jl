@@ -69,6 +69,8 @@ end
         @testset "take variable put monomial" begin
             @test sub_monomial(5*x*y*z*x*z*y*z*x,x,a*b)==5*a*b*y*z*a*b*z*y*z*a*b
             @test sub_monomial(x*y*z*x*z*y*z*x^3,x,a*b)==a*b*y*z*a*b*z*y*z*a*b*a*b*a*b
+            @test sub_monomial(x^4,x^2,x)==x^2    #It should not behave like this for RECURSIVEsub
+            @test sub_monomial(x^4,x^2,1)==1      #It should not behave like this for RECURSIVEsub
         end
 
         @testset "take variable put term" begin
@@ -123,4 +125,11 @@ end
     end
 
 
+end
+
+
+
+@testset "Misc. tests to add"
+    @test sub_monomial(x^2*y^2,x*y,-y*x,recursive=false) == -x*y*x*y;
+    @test sub_monomial(x^2*y^2,x*y,-y*x,recursive=true)  == y^2*x^2;
 end
