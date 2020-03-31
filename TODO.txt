@@ -1,8 +1,8 @@
 TODO
--Use safe syntax
---Use functions to access fields ✅
+-Test if it works for {true} with recursive=true.
+--If it does then set recursive=true when {C=true}
 
--Implement "Term"
---sub_monomial(MTermLike,DMonomialLike,DMonomialLike); ✅
-----sub_monomial(MTermLike,x*y,MTermPoly); ✅
--------Once implemented and understood term, maybe remove "Unzero_monomial" from Sub_monomial, and leave "Term".
+-Test recursive=true for {false}
+
+-Questions:
+--sub_monomial(x*y*x*y*x, x*y*x, z)?
