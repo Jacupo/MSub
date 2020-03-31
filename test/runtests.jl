@@ -4,6 +4,7 @@ using MSub
 
 @ncpolyvar x y z a b c
 
+#=
 @testset "find_monomial" begin
     @testset "Find PolyVar" begin
         @test MSub.find_monomial(x*y*z*x*z*y*x,x)==[1,4,7];
@@ -22,14 +23,32 @@ using MSub
         @test MSub.find_monomial(x*y*z*y*z^2*y*x*y*z^3,x*y*z^2)==[7];
     end
 end
+=#
 
-
-
+@testset "findfirst" begin
+    @testset "Find PolyVar" begin
+        @test findfirst(x*y*z*x*z*y*x, x)== (1, 1);
+        @test findfirst(x*y*x^2*z, x) == (1, 1);
+    end
+    @testset "Find Monomial(1)" begin
+        @test findfirst(x*y*z*x*z*y*x, Monomial{false}([x],[1])) == (1, 1);
+    end
+    @testset "Find Monomial(>1)" begin
+        @test findfirst(x*y^3*z^2*x^2, y*z*x) == (0, 3);
+        @test findfirst(x*y*z*x*z^2*x*y, x*y) == (1, 2);
+        @test findfirst(x^3*y^2*z, x*y) == (1, 2);
+        @test findfirst(x*y*z*x*z^2*x*y^2, x*y^2) == (6, 2);
+        @test findfirst(x*y*z*y*z^2*y, x*y*z) == (1, 3);
+        @test findfirst(x*y*z^2*y*z^2*y, x*y*z) == (1, 3);
+        @test findfirst(x*y*z^2*y*z^2*y*x*y*z, x*y*z)==(1, 3);
+        @test findfirst(x*y*z*y*z^2*y*x*y*z^3, x*y*z^2) == (7, 3);
+    end
+end
 
 @testset "sub_monomial" begin
 
     @testset "Arg(1)=Number" begin
-        @test sub_monomial(4,x*y,a)==4
+        @test sub_monomial(4, x*y, a) == 4
     end
 
     @testset "Same as subs" begin
@@ -82,6 +101,7 @@ end
             @test sub_monomial(17*x^3*y*z*x^2*z,x*y,a*b)==17*x^2*a*b*z*x^2*z
             @test sub_monomial(x^3*y^2*z*x^2*z,x*y,a*b)==x^2*a*b*y*z*x^2*z
             @test sub_monomial(x^3*y^2*z*x^2*z+a*x*y*b,x*y,a*b)==x^2*a*b*y*z*x^2*z+a^2*b^2
+            @test sub_monomial(z*x*y*z,x*y,x^2*y^2)==z*x^2*y^2*z
         end
 
         @testset "take monomial put term" begin
@@ -96,7 +116,7 @@ end
             @test sub_monomial(13*x*y*z*x*z*y*z*x,x*y,3*a*b+1)==39*a*b*z*x*z*y*z*x+13*z*x*z*y*z*x
             @test sub_monomial(x*y*z*x^2*z*y*z*x,z*x,3*a*b+1)==9*x*y*a*b*x*z*y*a*b+3*x*y*a*b*x*z*y+3*x*y*x*z*y*a*b+x*y*x*z*y
             @test sub_monomial(17*x^3*y*z*x^2*z,x*y,3*a*b+1)==51*x^2*a*b*z*x^2*z+17*x^2*z*x^2*z
-            @test sub_monomial(x^3*y^2*z*x^2*z,x*y,3*a*b+1)==3*x^2*a*b*y*z*x^2*z+x^2*y*z*x^2*z
+            @test sub_monomial(x^3*y^2*z*x^2*z,x*y,3*a*b+1)==3*x^2*a*b*y*z*x^2*z+3*x*a*b*z*x^2*z+x*z*x^2*z
             @test sub_monomial(x^3*y^2*z*x^2*z,x*y,3*a*b+c)==3*x^2*a*b*y*z*x^2*z+x^2*c*y*z*x^2*z
             @test sub_monomial(x^3*y^2*z*x^2*z+x*y*c,x*y,3*a*b+c)==3*x^2*a*b*y*z*x^2*z+x^2*c*y*z*x^2*z+3*a*b*c+c^2
         end
