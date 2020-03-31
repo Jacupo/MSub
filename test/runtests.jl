@@ -47,7 +47,7 @@ end
 
 @testset "sub_monomial" begin
 
-    @testset "Arg(1)=Number" begin
+    @testset "mon1::Number" begin
         @test sub_monomial(4, x*y, a) == 4
     end
 
