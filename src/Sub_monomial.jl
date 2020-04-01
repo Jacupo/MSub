@@ -22,11 +22,15 @@ function sub_monomial(
                       mon3::T; recursive=false) where {C, T <: Number}
     mon1 = _reduce(mon1)
     mon2 = _reduce(mon2)
-    if C && size(variables(mon2))>1
-        for m in zip(variables(mon2),exponents(mon2))
-            mon1 = sub_monomial(mon1,Monomial{true}([m[1]],[m[2]]),mon3,recursive=recursive);
+    if C && size(variables(mon2),1)>1
+        deg = find_degree(mon1,mon2);
+        if deg==0
+            return mon1;
         end
-        return mon1;
+        for m in zip(variables(mon2),exponents(mon2))
+            mon1 = sub_monomial(mon1,m[1]^(deg*m[2]),1);
+        end
+        return mon1*mon3^deg;
     else
         if recursive
             reduced = false
@@ -57,9 +61,14 @@ function sub_monomial(
     mon1 = _reduce(mon1)
     mon2 = _reduce(mon2)
     if C && size(variables(mon2),1)>1
-        for m in zip(variables(mon2),exponents(mon2))
-            mon1 = sub_monomial(mon1,Monomial{true}([m[1]],[m[2]]),mon3,recursive=recursive);
+        deg = find_degree(mon1,mon2);
+        if deg==0
+            return mon1;
         end
+        for m in zip(variables(mon2),exponents(mon2))
+            mon1 = sub_monomial(mon1,(m[1])^(deg*m[2]),1);
+        end
+        return mon1*mon3^deg;
     else
         if recursive
             reduced =false
@@ -92,10 +101,14 @@ function sub_monomial(
     mon1 = _reduce(mon1)
     mon2 = _reduce(mon2)
     if C && size(variables(mon2),1)>1
-        for m in zip(variables(mon2),exponents(mon2))
-            mon1 = sub_monomial(mon1,Monomial{true}([m[1]],[m[2]]),mon3,recursive=recursive);
+        deg = find_degree(mon1,mon2);
+        if deg==0
+            return mon1;
         end
-        return mon1;
+        for m in zip(variables(mon2),exponents(mon2))
+            mon1 = sub_monomial(mon1,(m[1])^(deg*m[2]),1);
+        end
+        return mon1*mon3^deg;
     else
         if recursive
             coef = one(T)
@@ -130,10 +143,15 @@ function sub_monomial(
     mon1 = _reduce(mon1)
     mon2 = _reduce(mon2)
     if C && size(variables(mon2),1)>1
-            for m in zip(variables(mon2),exponents(mon2))
-                mon1 = sub_monomial(mon1,Monomial{true}([m[1]],[m[2]]),mon3,recursive=recursive);
-            end
-        else
+        deg = find_degree(mon1,mon2);
+        if deg==0
+            return mon1;
+        end
+        for m in zip(variables(mon2),exponents(mon2))
+            mon1 = sub_monomial(mon1,(m[1])^(deg*m[2]),1);
+        end
+        return mon1*mon3^deg;
+    else
         factors = split(mon1, mon2)
         if factors isa Nothing
             return mon1

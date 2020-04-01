@@ -1,11 +1,18 @@
 using DynamicPolynomials
-# using Revise
+using Revise
 using MSub
 
 @polyvar q w e r
 
-sub_monomial(q^2*r^2, q*r,e, recursive=true)
+sub_monomial(q^2*r^2, q*r,e)
+MSub.find_degree(q^2*r^2, q*r)
+sub_monomial(q^6*r^2,q^2*r,e)
+mon2 = q*r^2
+for m in zip(variables(mon2),exponents(mon2))
+    println(m[1], ", ", m[2])
+    println(typeof(m[1]), ", ", typeof(m[2]))
+end
 
-q^2*r^2 isa MSub.MPolynomialLike{true}
-q*r isa MSub.MMonomialLike{true}
-e isa MSub.MPolynomialLike{true}
+mon2^2
+
+sub_monomial(q^6*r^2,q^2,1)

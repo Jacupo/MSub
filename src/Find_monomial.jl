@@ -4,7 +4,7 @@
 Returns first position where mon2 can be found in the representation of mon1.
 Second output is the length of mon2.
 """
-function Base.findfirst(mon1::MMonomialLike{C}, mon2::PolyVar{C}) where {C}
+function Base.findfirst(mon1::MMonomialLike{false}, mon2::PolyVar{false}) where {C}
         position = findfirst( x -> x == mon2, variables(mon1))
         if position isa Nothing
             return 0, 1
@@ -74,4 +74,17 @@ function split(mon1::Monomial{C}, mon2::MMonomialLike{C}) where {C}
         end
     end
     return Monomial{C}(var1, exp1), Monomial{C}(var2, exp2)
+end
+
+
+function find_degree(mon1::MMonomialLike{true}, mon2::MMonomialLike{true})
+    deg = maximum(exponents(mon1));
+    for m in zip(variables(mon2),exponents(mon2))
+        position = findfirst(mon1,Monomial{true}([m[1]],[m[2]]))[1];
+        if position==0
+            return 0;
+        end
+        deg = min(deg,floor(exponents(mon1)[position]/m[2]));
+    end
+    return convert(Int64,deg);
 end
