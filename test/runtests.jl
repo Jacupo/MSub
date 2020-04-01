@@ -120,6 +120,7 @@ end
 
 @testset "Commutative sub_monomial" begin
     @test sub_monomial(q^2*r^2, q*r,8) == 64
+    @test sub_monomial(q*r,q^2*r^2,e) == q*r
     @test sub_monomial(q^2*r^2, q*r,e) == e^2
     @test sub_monomial(q^6*r^2,q^2*r,e) == q^2*e^2
     @test sub_monomial(3*q^4*r^2+q^6*r^2,q^2*r,e) == 3*e^2+q^2*e^2
