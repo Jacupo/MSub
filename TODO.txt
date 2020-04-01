@@ -1,8 +1,1 @@
 TODO
--Use safe syntax
---Use functions to access fields ✅
-
--Implement "Term"
---sub_monomial(MTermLike,DMonomialLike,DMonomialLike); ✅
-----sub_monomial(MTermLike,x*y,MTermPoly); ✅
--------Once implemented and understood term, maybe remove "Unzero_monomial" from Sub_monomial, and leave "Term".
