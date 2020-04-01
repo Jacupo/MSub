@@ -1,8 +1,7 @@
 TODO
 -Test if it works for {true} with recursive=true.
 --If it does then set recursive=true when {C=true}
-
--Test recursive=true for {false}
+----❌It doesn't work: sub_monomial(q^2*r^2, q*r,e, recursive=true)→qer while it should give e^2.
 
 -Questions:
 --sub_monomial(x*y*x*y*x, x*y*x, z)?
