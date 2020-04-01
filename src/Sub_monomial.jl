@@ -22,21 +22,28 @@ function sub_monomial(
                       mon3::T; recursive=false) where {C, T <: Number}
     mon1 = _reduce(mon1)
     mon2 = _reduce(mon2)
-    if recursive
-        reduced = false
-        coef = one(T)
-        while !reduced
-            factors = split(mon1, mon2)
-            if factors isa Nothing
-                reduced = true
-            else
-                mon1 = _reduce(safe_multiplication(first(factors), last(factors)))
-                coef *= mon3
-            end
+    if C && size(variables(mon2))>1
+        for m in zip(variables(mon2),exponents(mon2))
+            mon1 = sub_monomial(mon1,Monomial{true}([m[1]],[m[2]]),mon3,recursive=recursive);
         end
-        return coef*mon1
+        return mon1;
     else
-        return sub_monomial(mon1,mon2,mon3*one(Monomial{C}));
+        if recursive
+            reduced = false
+            coef = one(T)
+            while !reduced
+                factors = split(mon1, mon2)
+                if factors isa Nothing
+                    reduced = true
+                else
+                    mon1 = _reduce(safe_multiplication(first(factors), last(factors)))
+                    coef *= mon3
+                end
+            end
+            return coef*mon1
+        else
+            return sub_monomial(mon1,mon2,mon3*one(Monomial{C}));
+        end
     end
 
 
@@ -49,26 +56,31 @@ function sub_monomial(
                       mon3::MMonomialLike{C}; recursive=false) where {C, T}
     mon1 = _reduce(mon1)
     mon2 = _reduce(mon2)
-    if recursive
-        reduced =false
-        while !reduced
-            factors = split(mon1, mon2)
-            if factors isa Nothing
-                reduced = true
-            else
-                mon1 = _reduce(safe_multiplication(safe_multiplication(first(factors), mon3), last(factors)))
-            end
+    if C && size(variables(mon2),1)>1
+        for m in zip(variables(mon2),exponents(mon2))
+            mon1 = sub_monomial(mon1,Monomial{true}([m[1]],[m[2]]),mon3,recursive=recursive);
         end
     else
-        factors = split(mon1, mon2)
-        if factors isa Nothing
-            return mon1;
+        if recursive
+            reduced =false
+            while !reduced
+                factors = split(mon1, mon2)
+                if factors isa Nothing
+                    reduced = true
+                else
+                    mon1 = _reduce(safe_multiplication(safe_multiplication(first(factors), mon3), last(factors)))
+                end
+            end
         else
-            term = sub_monomial(last(factors),mon2,mon3);
-            mon1 = _reduce(safe_multiplication(safe_multiplication(first(factors), mon3), term))
+            factors = split(mon1, mon2)
+            if factors isa Nothing
+                return mon1;
+            else
+                term = sub_monomial(last(factors),mon2,mon3);
+                mon1 = _reduce(safe_multiplication(safe_multiplication(first(factors), mon3), term))
+            end
         end
     end
-
     return mon1;
 end
 
@@ -79,28 +91,35 @@ function sub_monomial(
                       mon3::Term{C,T};recursive=false) where {C, T}
     mon1 = _reduce(mon1)
     mon2 = _reduce(mon2)
-    if recursive
-        coef = one(T)
-        reduced =false
-        while !reduced
+    if C && size(variables(mon2),1)>1
+        for m in zip(variables(mon2),exponents(mon2))
+            mon1 = sub_monomial(mon1,Monomial{true}([m[1]],[m[2]]),mon3,recursive=recursive);
+        end
+        return mon1;
+    else
+        if recursive
+            coef = one(T)
+            reduced =false
+            while !reduced
+                factors = split(mon1, mon2)
+                if factors isa Nothing
+                    reduced = true
+                else
+                    mon1 = _reduce(safe_multiplication(safe_multiplication(first(factors), monomial(mon3)), last(factors)))
+                    coef *= coefficient(mon3)
+                end
+            end
+            return coef*mon1
+        else
             factors = split(mon1, mon2)
             if factors isa Nothing
-                reduced = true
+                return mon1;
             else
-                mon1 = _reduce(safe_multiplication(safe_multiplication(first(factors), monomial(mon3)), last(factors)))
-                coef *= coefficient(mon3)
+                term = sub_monomial(last(factors),mon2,mon3);
+                mon1 = _reduce(safe_multiplication(safe_multiplication(first(factors), monomial(mon3)), monomial(term)))
             end
+            return coefficient(term)*coefficient(mon3)*mon1;
         end
-        return coef*mon1
-    else
-        factors = split(mon1, mon2)
-        if factors isa Nothing
-            return mon1;
-        else
-            term = sub_monomial(last(factors),mon2,mon3);
-            mon1 = _reduce(safe_multiplication(safe_multiplication(first(factors), monomial(mon3)), monomial(term)))
-        end
-        return coefficient(term)*coefficient(mon3)*mon1;
     end
 end
 
@@ -110,11 +129,17 @@ function sub_monomial(
                       mon3::Polynomial{C, T}; recursive=false) where {C, T}
     mon1 = _reduce(mon1)
     mon2 = _reduce(mon2)
-    factors = split(mon1, mon2)
-    if factors isa Nothing
-        return mon1
-    else
-        return sum(sub_monomial( coefficient(t)*safe_multiplication(safe_multiplication(first(factors), monomial(t)), last(factors)), mon2, mon3, recursive=recursive) for t in DynamicPolynomials.TermIterator(mon3))
+    if C && size(variables(mon2),1)>1
+            for m in zip(variables(mon2),exponents(mon2))
+                mon1 = sub_monomial(mon1,Monomial{true}([m[1]],[m[2]]),mon3,recursive=recursive);
+            end
+        else
+        factors = split(mon1, mon2)
+        if factors isa Nothing
+            return mon1
+        else
+            return sum(sub_monomial( coefficient(t)*safe_multiplication(safe_multiplication(first(factors), monomial(t)), last(factors)), mon2, mon3, recursive=recursive) for t in DynamicPolynomials.TermIterator(mon3))
+        end
     end
 end
 

@@ -1,7 +1,19 @@
 TODO
--Test if it works for {true} with recursive=true.
---If it does then set recursive=true when {C=true}
-----❌It doesn't work: sub_monomial(q^2*r^2, q*r,e, recursive=true)→qer while it should give e^2.
+- Test if it works for {true} with recursive=true.
+-- If it does then set recursive=true when {C=true}
+---- ❌It doesn't work: sub_monomial(q^2*r^2, q*r,e, recursive=true)→qer while it should give e^2.
+---- 🔜For commuting variables I need to decompose mon2 in PolyVar and find each of them in the mon1.
+---- 🔜Simply using this splitting, should allow to extend it to {C=true} using recursive=false.
+---- ❌Attenzione (q^2*w^3,q*w,2)=4*w
 
--Questions:
---sub_monomial(x*y*x*y*x, x*y*x, z)?
+- It should be nice to be able to substitute commuting variables in NC monomials
+- for example for fermions one have a†*a=δ-a*a† where a and a† are PolyVar{false}
+- and δ is a PolyVar{true}.
+- Unfortunately if I try to compute δ*a I obtain the error:
+-- ERROR: StackOverflowError:
+-- Stacktrace:
+-- [1] mapexponents(::Function, ::Monomial{true}, ::Monomial{false})
+-- at /Users/jacoposurace/.julia/dev/MultivariatePolynomials/src/monomial.jl:123 (repeats 80000 times)
+
+- Questions:
+-- sub_monomial(x*y*x*y*x, x*y*x, z)?
