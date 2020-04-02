@@ -4,6 +4,7 @@
 Returns first position where mon2 can be found in the representation of mon1.
 Second output is the length of mon2.
 """
+
 function Base.findfirst(mon1::MMonomialLike{C}, mon2::PolyVar{C}) where {C}
         position = findfirst( x -> x == mon2, variables(mon1))
         if position isa Nothing

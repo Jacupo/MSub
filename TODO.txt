@@ -1,1 +1,22 @@
 TODO
+
+- EXTENSION
+-- It should be nice to be able to substitute commuting variables in NC monomials
+-- for example for fermions one have a†*a=δ-a*a† where a and a† are PolyVar{false}
+-- and δ is a PolyVar{true}.
+-- Unfortunately if I try to compute δ*a with DynamicPolynomials I obtain the error:
+---- ERROR: StackOverflowError:
+---- Stacktrace:
+---- [1] mapexponents(::Function, ::Monomial{true}, ::Monomial{false})
+---- at /Users/jacoposurace/.julia/dev/MultivariatePolynomials/src/monomial.jl:123 (repeats 80000 times)
+
+- SPECIAL CASE
+-- sub_monomial(x*y*x*y*x, x*y*x, z)?
+
+- WHICH DEFAULT?
+-- maybe we should just leave as default the recursive version
+-- of the substitution for Non commuting variables that is,
+---- sub_monomial(xxyy,xy,yx,recursive=true)=yyxx <-leave this as default
+---- sub_monomial(xxyy,xy,yx,recursive=false)=xyxy <-not this
+-- it make more sense for our final aim.
+
