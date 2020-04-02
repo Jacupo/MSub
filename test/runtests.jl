@@ -4,8 +4,8 @@ using MSub
 
 @ncpolyvar x y z a b c
 
-
 @testset "findfirst" begin
+
     @testset "Find PolyVar" begin
         @test findfirst(x*y*z*x*z*y*x, x)== (1, 1);
         @test findfirst(x*y*x^2*z, x) == (1, 1);
@@ -24,6 +24,7 @@ using MSub
         @test findfirst(x*y*z*y*z^2*y*x*y*z^3, x*y*z^2) == (7, 3);
     end
 end
+
 
 @testset "Non-Commutative sub_monomial" begin
     @testset "sub_monomial recursive=FALSE" begin
@@ -119,7 +120,7 @@ end
 @polyvar q w e r
 
 @testset "Commutative sub_monomial" begin
-    @test sub_monomial(q^3*e^2,q^2*r,e) == q*r*e
+    @test sub_monomial(q^3*r^2,q^2*r,e) == q*r*e
     @test sub_monomial(q^2*r^2, q*r,8) == 64
     @test sub_monomial(q*r,q^2*r^2,e) == q*r
     @test sub_monomial(q^2*r^2, q*r,e) == e^2
