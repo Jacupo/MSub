@@ -165,7 +165,6 @@ function sub_monomial(
     return coefficient(mon1)*sub_monomial(monomial(mon1), mon2, mon3, recursive=recursive)
 end
 
-
 function sub_monomial(
                       mon1::Polynomial{C,T},
                       mon2::MMonomialLike{C},

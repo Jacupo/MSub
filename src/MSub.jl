@@ -12,6 +12,7 @@ include("Find_monomial.jl");
 include("division.jl");
 
 
+
 # TODO remove when fixed, see https://github.com/JuliaAlgebra/DynamicPolynomials.jl/issues/58
 function safe_multiplication(a::PolyVar{C}, b::Monomial{C}) where {C}
     return convert(Monomial{C}, a) * b
