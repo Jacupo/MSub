@@ -12,6 +12,12 @@ TODO
 
 - SPECIAL CASE
 -- sub_monomial(x*y*x*y*x, x*y*x, z)?
+--- note: in the for loop, for the commuting case, we want to sub x2*y in x3*y2
+--- and in the code we find the degree of x2*y in x3*y2 which is 1. then we
+--- apply sub_monomial(x3*y2, x2^deg,1) giving x*y2. to this we do the same for y
+--- giving sub_monomial(x*y2, y^deg, 1) which ideally should give x*y, but the
+--- function applies the substitution twice, so we end up with x. the end result
+--- is x*z instead of the correct x*y*z.
 
 - WHICH DEFAULT?
 -- maybe we should just leave as default the recursive version
