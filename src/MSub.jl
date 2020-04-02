@@ -9,6 +9,7 @@ const MPolynomialLike{C, T} =  Union{T, PolyVar{C}, Monomial{C}, Term{C, T}, Pol
 
 include("reduce.jl")
 include("Find_monomial.jl");
+include("division.jl");
 
 
 # TODO remove when fixed, see https://github.com/JuliaAlgebra/DynamicPolynomials.jl/issues/58

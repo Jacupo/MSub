@@ -26,9 +26,8 @@ function sub_monomial(
         deg = find_degree(mon1,mon2);
         if deg==0
             return mon1;
-        end
-        for m in zip(variables(mon2),exponents(mon2))
-            mon1 = sub_monomial(mon1,m[1]^(deg*m[2]),1);
+        else
+            mon1 = div(mon1,mon2);
         end
         return mon1*mon3^deg;
     else
@@ -64,9 +63,8 @@ function sub_monomial(
         deg = find_degree(mon1,mon2);
         if deg==0
             return mon1;
-        end
-        for m in zip(variables(mon2),exponents(mon2))
-            mon1 = sub_monomial(mon1,(m[1])^(deg*m[2]),1);
+        else
+            mon1 = div(mon1,mon2);
         end
         return mon1*mon3^deg;
     else
@@ -104,9 +102,8 @@ function sub_monomial(
         deg = find_degree(mon1,mon2);
         if deg==0
             return mon1;
-        end
-        for m in zip(variables(mon2),exponents(mon2))
-            mon1 = sub_monomial(mon1,(m[1])^(deg*m[2]),1);
+        else
+            mon1 = div(mon1,mon2);
         end
         return mon1*mon3^deg;
     else
@@ -146,9 +143,8 @@ function sub_monomial(
         deg = find_degree(mon1,mon2);
         if deg==0
             return mon1;
-        end
-        for m in zip(variables(mon2),exponents(mon2))
-            mon1 = sub_monomial(mon1,(m[1])^(deg*m[2]),1);
+        else
+            mon1 = div(mon1,mon2);
         end
         return mon1*mon3^deg;
     else

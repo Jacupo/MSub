@@ -119,6 +119,7 @@ end
 @polyvar q w e r
 
 @testset "Commutative sub_monomial" begin
+    @test sub_monomial(q^3*e^2,q^2*r,e) == q*r*e
     @test sub_monomial(q^2*r^2, q*r,8) == 64
     @test sub_monomial(q*r,q^2*r^2,e) == q*r
     @test sub_monomial(q^2*r^2, q*r,e) == e^2
