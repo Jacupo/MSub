@@ -27,7 +27,7 @@ function sub_monomial(
         if deg==0
             return mon1;
         else
-            mon1 = div(mon1,mon2);
+            mon1 = div(mon1,mon2^deg);
         end
         return mon1*mon3^deg;
     else
@@ -64,7 +64,7 @@ function sub_monomial(
         if deg==0
             return mon1;
         else
-            mon1 = div(mon1,mon2);
+            mon1 = div(mon1,mon2^deg);
         end
         return mon1*mon3^deg;
     else
@@ -103,7 +103,7 @@ function sub_monomial(
         if deg==0
             return mon1;
         else
-            mon1 = div(mon1,mon2);
+            mon1 = div(mon1,mon2^deg);
         end
         return mon1*mon3^deg;
     else
@@ -144,7 +144,7 @@ function sub_monomial(
         if deg==0
             return mon1;
         else
-            mon1 = div(mon1,mon2);
+            mon1 = div(mon1,mon2^deg);
         end
         return mon1*mon3^deg;
     else
