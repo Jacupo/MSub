@@ -125,4 +125,5 @@ end
     @test sub_monomial(q^6*r^2,q^2*r,e) == q^2*e^2
     @test sub_monomial(3*q^4*r^2+q^6*r^2,q^2*r,e) == 3*e^2+q^2*e^2
     @test sub_monomial(5*q^4*r^6,q*r^2,-2*e+1) == -40*q*e^3+60*q*e^2-30*q*e+5*q
+    @test sub_monomial(q^3*r^2,q^2*r,e) == q*e*r
 end
