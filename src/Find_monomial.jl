@@ -75,16 +75,3 @@ function split(mon1::Monomial{C}, mon2::MMonomialLike{C}) where {C}
     end
     return Monomial{C}(var1, exp1), Monomial{C}(var2, exp2)
 end
-
-
-function find_degree(mon1::MMonomialLike{true}, mon2::MMonomialLike{true})
-    deg = maximum(exponents(mon1));
-    for m in zip(variables(mon2),exponents(mon2))
-        position = findfirst(mon1,Monomial{true}([m[1]],[m[2]]))[1];
-        if position==0
-            return 0;
-        end
-        deg = min(deg,floor(exponents(mon1)[position]/m[2]));
-    end
-    return convert(Int64,deg);
-end
