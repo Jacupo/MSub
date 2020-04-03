@@ -48,14 +48,14 @@ Deciding when to stop is **critical**, we can easily fall in cyclical substituti
 ## Substitution tensor
 The program should work with these steps:
 
-  1. Accept a tensor of substitution s `T`.
-  2. Optimise the substitution s' tensor.
-  3. Apply recursively the substitution s.
+  1. Accept a tensor of substitutions `T`.
+  2. Optimise the substitutions' tensor.
+  3. Apply recursively the substitutions.
 
-The optimisation step should return a `T` such that a recursive substitution s routine eventually stops.
+The optimisation step should return a `T` such that a recursive substitutions routine eventually stops.
 ### Form of the substitution  tensor
 Defined an array of variables `α=[α_1,α_2,...,α_N]` the elements of the substitutions tensor `Tm` must be `Union{T, PolyVar{C}, Monomial{C}, Term{C, T}}` we call this _variables form_.<br/>
-Once decided how to deal with `Polynomial{C,T}` we should extend the substitution s to the whole `MPolynomialLike`.
+Once decided how to deal with `Polynomial{C,T}` we should extend the substitutions to the whole `MPolynomialLike`.
 It must be even possible to specify each element of `Tm` as an `(m+1)-element Tuple{Int}`.<br/>
 Each array will specify how to build the monomial to substitute.<br/>
   ***example***
@@ -139,9 +139,9 @@ function set_cycle(Tm,cindex,coeff)
 
 
 
-🈺 This algorithm works for substitution s of `MMonomialLike`→`MMonomialLike`.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In the case one has to deal with substitution s of `MMonomialLike`→`Polynomial` there are different possibilities.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suppose we are dealing with substitution s tensor of order `m`. Let us consider `Tm[i_1,...,i_m]=P`, where `P` is a `Polynomial`.  
+🈺 This algorithm works for substitutions of `MMonomialLike`→`MMonomialLike`.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In the case one has to deal with substitutions of `MMonomialLike`→`Polynomial` there are different possibilities.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suppose we are dealing with substitutions tensor of order `m`. Let us consider `Tm[i_1,...,i_m]=P`, where `P` is a `Polynomial`.  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅All the monomial in `P` of order smaller then `m` are accepted.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;❌All the monomial in `P` of order bigger then `m` are not accepted and we will not accept `T`.<br/>
