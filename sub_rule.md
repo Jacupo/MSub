@@ -56,14 +56,14 @@ The optimisation step should return a `T` such that a recursive substitutions ro
 ### Form of the substitution  tensor
 Defined an array of variables `α=[α_1,α_2,...,α_N]` the elements of the substitutions tensor `Tm` must be `Union{T, PolyVar{C}, Monomial{C}, Term{C, T}}` we call this _variables form_.<br/>
 Once decided how to deal with `Polynomial{C,T}` we should extend the substitutions to the whole `MPolynomialLike`.
-It must be even possible to specify each element of `Tm` as an `(m+1)-element Tuple{Int}`.<br/>
+It must be even possible to specify each element of `Tm` as a `Tuple{Int}` of at most `(m+1)-element`.<br/>
 Each array will specify how to build the monomial to substitute.<br/>
   ***example***
 
   + `T2[1,2]=(1,3,4)` indicate the substitution `α_1α_2`→`α_3α_4`.
-  + `T2[1,2]=(1,4,0)` indicate the substitution `α_1α_2`→`α_4`.
-  + `T2[1,2]=(7,4,0)` indicate the substitution `α_1α_2`→`7*α_4`.
-  + `T2[1,2]=(2,0,0)` indicate the substitution `α_1α_2`→`2`.
+  + `T2[1,2]=(1,4)` indicate the substitution `α_1α_2`→`α_4`.
+  + `T2[1,2]=(7,4)` indicate the substitution `α_1α_2`→`7*α_4`.
+  + `T2[1,2]=(2,0)` indicate the substitution `α_1α_2`→`2`.
 
 When a susbstitution tensor is written in this form we will say it is in _tuples form_.
 
@@ -90,7 +90,7 @@ The standard form of the substitution tensor has the same structure for every va
 or
 
 + _variables form_ → `T2[1,2]=5*α_2`,
-+ _tuple form_ → `T2[1,2]=(5,2,0)`,
++ _tuple form_ → `T2[1,2]=(5,2)`,
 + _standard form_ → `T2[1,2]=(5,1,2)`.
 
 
