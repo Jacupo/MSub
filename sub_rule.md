@@ -129,6 +129,11 @@ function set_cycle(Tm,cindex,coeff)
 
 ***It is important to check for all the Tm starting from the bigger `m` and moving to the smaller `m`***
 
+<object data="https://github.com/Jacupo/MSub/blob/master/Figure1.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="https://github.com/Jacupo/MSub/blob/master/Figure1.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://github.com/Jacupo/MSub/blob/master/Figure1.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
 
 <!-- 5. Define `first=findfirst(x->x==Tm[index][3]=m,cindex)`then
   + If `first==index` and `cycle=1` then `index++`, and reset `cindex`,`coeffs` and `cycle`.
