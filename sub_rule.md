@@ -85,13 +85,27 @@ The standard form of the substitution tensor has the same structure for every va
 
   + _variables form_ → `T2[1,2]=7*α_2α_3`,
   + _tuple form_ → `T2[1,2]=(7,2,3)`,
-  + _standard form_ → `T^[1,2]=(7,2,8)`;
+  + _standard form_ → `T2[1,2]=(7,2,8)`;
 
 or
 
 + _variables form_ → `T2[1,2]=5*α_2`,
 + _tuple form_ → `T2[1,2]=(5,2,0)`,
-+ _standard form_ → `T^[1,2]=(5,1,2)`.
++ _standard form_ → `T2[1,2]=(5,1,2)`.
+
+
+or
+
++ _variables form_ → `T2[1,2]=5*α_2^2`,
++ _tuple form_ → `T2[1,2]=(5,2,2)`,
++ _standard form_ → `T2[1,2]=(5,2,5)`.
+
+
+or
+
++ _variables form_ → `T2[1,2]=5*α_2^2*α_3`,
++ _tuple form_ → `T2[1,2]=(5,2,2,3)`,
++ _standard form_ → _not admitted, the degree of the substitution is bigger then m_.
 
 
 
