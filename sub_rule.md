@@ -129,11 +129,17 @@ function set_cycle(Tm,cindex,coeff)
 
 ***It is important to check for all the Tm starting from the bigger `m` and moving to the smaller `m`***
 
-<object data="https://github.com/Jacupo/MSub/blob/master/Figure1.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="https://github.com/Jacupo/MSub/blob/master/Figure1.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://github.com/Jacupo/MSub/blob/master/Figure1.pdf">Download PDF</a>.</p>
-    </embed>
-</object>
+<img src="Figure1.png" alt="drawing" width="200"/> <br/>
+Figure1. This is the notation used.
+
+<img src="Figure2.png" alt="drawing" width="400"/> <br/>
+Figure2. Representation of a possible set of substitutions.
+
+<img src="Figure3.png" alt="drawing" width="400"/> <br/>
+Figure3. Substitutions after having solved cycles and chains.
+
+
+
 
 <!-- 5. Define `first=findfirst(x->x==Tm[index][3]=m,cindex)`then
   + If `first==index` and `cycle=1` then `index++`, and reset `cindex`,`coeffs` and `cycle`.
